@@ -1,0 +1,86 @@
+@use '@/scss/utils/variables' as *;
+@use '@/scss/utils/mixins' as *;
+
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: center;
+  justify-content: space-between;
+
+  color: $color-text-filters;
+
+  @media (width <= 768px) {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  font-weight: $font-bold;
+
+  @include fluid-prop(gap, 8px, 12px);
+
+  &__item {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+
+    @include fluid-prop(padding-block, 5px, 9px);
+    @include fluid-prop(padding-inline, 10px, 19px);
+
+    &:hover:not(.tabs__item--active) {
+      border: 1px solid $color-border-search;
+    }
+
+    &--active {
+      border-color: $color-primary;
+    }
+  }
+
+  &__text {
+    @include fluid-prop(font-size, $text-sm, $text-base);
+
+    line-height: $leading-lg;
+
+    .tabs__item--active & {
+      color: $color-primary;
+    }
+  }
+
+  &__count {
+    align-self: flex-start;
+    font-size: $text-2xs;
+
+    .tabs__item--active & {
+      color: $color-primary;
+    }
+  }
+}
+
+.search {
+  position: relative;
+  width: 100%;
+  max-width: 315px;
+
+  &__input {
+    width: 100%;
+    padding: 11px 44px 12px 16px;
+    border: 1px solid $color-border-search;
+    border-radius: 4px;
+  }
+
+  &__icon {
+    pointer-events: none;
+
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    transform: translateY(-50%);
+  }
+
+  @media (width <= 768px) { max-width: 100%; }
+}

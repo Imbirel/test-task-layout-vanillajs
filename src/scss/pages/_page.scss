@@ -1,0 +1,110 @@
+@use '@/scss/utils/variables' as *;
+@use '@/scss/utils/mixins' as *;
+
+.page {
+  position: relative;
+  max-width: $container-width;
+  min-height: 100vh;
+  margin: 0 auto;
+
+  @include fluid-prop(padding-inline, 10px, 15px);
+  @include fluid-prop(padding-top, 20px, 44px);
+  @include fluid-prop(padding-bottom, 40px, 76px);
+
+  &__header {
+    @include fluid-prop(margin-right, 0, 52px);
+    @include fluid-prop(margin-bottom, 40px, 85px);
+  }
+
+  &__filters {
+    @include fluid-prop(margin-bottom, 40px, 60px);
+  }
+
+  &__bg-shapes {
+    pointer-events: none;
+
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+
+    overflow: hidden;
+
+    width: 100vw;
+    height: 100%;
+  }
+
+  &__shape {
+    position: absolute;
+
+    &--1 { 
+      top: 50px;
+      right: -2.5%; 
+
+      width: 162px;
+      height: 177px;
+
+      background-image: url('@/assets/svg/dots.svg');
+    }
+
+    &--2 { 
+      top: 687px;
+      left: 3%; 
+
+      width: 83px;
+      height: 44px;
+
+      background-image: url('@/assets/svg/shapes1.svg');
+    }
+
+    &--3 { 
+      top: 1104px;
+      right: 4%; 
+
+      width: 85px;
+      height: 85px;
+
+      background-image: url('@/assets/svg/shapes2.svg');
+    }
+  }
+}
+
+.page-header {
+  text-align: center;
+  
+  &__subtitle {
+    @include fluid-prop(margin-bottom, 5px, 8px);
+
+    font-weight: $font-bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+    @include fluid-prop(font-size, $text-sm, $text-base);
+  }
+
+  &__title {
+    font-weight: $font-black;
+    line-height: $leading-xs;
+
+    @include fluid-prop(font-size, $text-3xl, $text-5xl);
+  }
+}
+
+.load-more {
+  display: flex;
+  gap: 16px;
+  margin: 0 auto;
+
+  @include fluid-prop(padding-block, 5px, 9px);
+  @include fluid-prop(padding-inline, 10px, 19px);
+
+  color: $color-text-load-more;
+
+  &__text {
+    font-weight: $font-bold;
+    line-height: 1.6;
+
+    @include fluid-prop(font-size, $text-sm, $text-base);
+  }
+}

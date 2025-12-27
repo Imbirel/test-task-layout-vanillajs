@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Explore our diverse range of online courses in Marketing, Design, Development, and more."
+    />
+    <title>Our Online Courses | Study Platform</title>
+    <link rel="preload" href="/src/assets/fonts/lato-black.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/src/assets/fonts/lato-bold.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/src/assets/fonts/lato-regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="./src/scss/main.scss" />
+  </head>
+  <body>
+    <main class="page">
+      <!-- Header Section -->
+      <header class="page__header page-header">
+        <p class="page-header__subtitle">ENJOY YOUR STUDYING!</p>
+        <h1 class="page-header__title">Our online courses</h1>
+      </header>
+
+      <!-- Search & Filters Section -->
+      <section class="page__filters filters" aria-labelledby="filters-title">
+        <h2 id="filters-title" class="sr-only">Course filters and search</h2>
+
+        <div class="filters__tabs tabs" role="tablist" aria-label="Course categories">
+          <button
+            class="tabs__item tabs__item--active"
+            data-category="all"
+            role="tab"
+            aria-selected="true"
+            aria-controls="courses-grid"
+            id="tab-all"
+          >
+            <span class="tabs__text">All</span>
+            <span class="tabs__count"></span>
+          </button>
+          <button
+            class="tabs__item"
+            data-category="marketing"
+            role="tab"
+            aria-selected="false"
+            aria-controls="courses-grid"
+            id="tab-marketing"
+          >
+            <span class="tabs__text">Marketing</span>
+            <span class="tabs__count"></span>
+          </button>
+          <button
+            class="tabs__item"
+            data-category="management"
+            role="tab"
+            aria-selected="false"
+            aria-controls="courses-grid"
+            id="tab-management"
+          >
+            <span class="tabs__text">Management</span>
+            <span class="tabs__count"></span>
+          </button>
+          <button
+            class="tabs__item"
+            data-category="hr"
+            role="tab"
+            aria-selected="false"
+            aria-controls="courses-grid"
+            id="tab-hr"
+          >
+            <span class="tabs__text">HR & Recruting</span>
+            <span class="tabs__count"></span>
+          </button>
+          <button
+            class="tabs__item"
+            data-category="design"
+            role="tab"
+            aria-selected="false"
+            aria-controls="courses-grid"
+            id="tab-design"
+          >
+            <span class="tabs__text">Design</span>
+            <span class="tabs__count"></span>
+          </button>
+          <button
+            class="tabs__item"
+            data-category="development"
+            role="tab"
+            aria-selected="false"
+            aria-controls="courses-grid"
+            id="tab-development"
+          >
+            <span class="tabs__text">Development</span>
+            <span class="tabs__count"></span>
+          </button>
+        </div>
+
+        <div class="filters__search search">
+          <label for="search-input" class="sr-only">Search courses by title or author</label>
+          <input
+            type="search"
+            id="search-input"
+            class="search__input"
+            placeholder="Search course..."
+            aria-label="Search courses"
+            role="searchbox"
+            autocomplete="off"
+          />
+          <svg class="search__icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path
+              d="M7.333 12.667A5.333 5.333 0 1 0 7.333 2a5.333 5.333 0 0 0 0 10.667ZM14 14l-2.9-2.9"
+              stroke="currentColor"
+              stroke-width="1.333"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+      </section>
+
+      <!-- Courses Grid Section -->
+      <section class="courses">
+        <div class="courses__grid" id="courses-grid" role="region" aria-label="Course listings">
+          <!-- JS dynamic content -->
+        </div>
+
+        <!-- "Load More" button (shown when there are hidden cards) -->
+        <button class="load-more" id="load-more-button" aria-label="Load more courses" type="button">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="currentcolor"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M2.09961 2C2.65189 2 3.09961 2.44772 3.09961 3V7.43632C4.75764 4.20928 8.11959 2 11.9996 2C16.3552 2 20.058 4.78413 21.4303 8.66675C21.6144 9.18747 21.3414 9.75879 20.8207 9.94284C20.3 10.1269 19.7287 9.85396 19.5446 9.33325C18.4459 6.22472 15.4813 4 11.9996 4C9.03957 4 6.45326 5.60799 5.06955 8H8.09957C8.65186 8 9.09957 8.44772 9.09957 9C9.09957 9.55228 8.65186 10 8.09957 10H2.09961C1.54732 10 1.09961 9.55228 1.09961 9V3C1.09961 2.44772 1.54732 2 2.09961 2Z"
+              fill="#424551"
+            />
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M3.17664 14.0572C3.69736 13.8731 4.26868 14.146 4.45273 14.6668C5.55144 17.7753 8.51608 20 11.9978 20C14.9578 20 17.5441 18.392 18.9278 16H15.8978C15.3455 16 14.8978 15.5523 14.8978 15C14.8978 14.4477 15.3455 14 15.8978 14H21.8977C22.45 14 22.8977 14.4477 22.8977 15V21C22.8977 21.5523 22.45 22 21.8977 22C21.3455 22 20.8977 21.5523 20.8977 21V16.5637C19.2397 19.7907 15.8778 22 11.9978 22C7.64215 22 3.93936 19.2159 2.56705 15.3332C2.383 14.8125 2.65593 14.2412 3.17664 14.0572Z"
+              fill="#424551"
+            />
+          </svg>
+          <span class="load-more__text">Load more</span>
+        </button>
+      </section>
+
+      <!-- Decorative Background -->
+      <div class="page__bg-shapes" aria-hidden="true">
+        <div class="page__shape page__shape--1"></div>
+        <div class="page__shape page__shape--2"></div>
+        <div class="page__shape page__shape--3"></div>
+      </div>
+    </main>
+
+    <template id="course-card-template">
+      <article class="course-card">
+        <img class="course-card__image" src="" width="390" height="240" alt="" decoding="async" />
+        <div class="course-card__content">
+          <span class="course-card__category"></span>
+          <h3 class="course-card__title"></h3>
+          <div class="course-card__info">
+            <span class="course-card__price"></span>
+            <span class="course-card__author"></span>
+          </div>
+        </div>
+      </article>
+    </template>
+
+    <template id="empty-state-template">
+      <div class="courses__empty empty-state">
+        <p class="empty-state__title">No courses found</p>
+        <p class="empty-state__subtitle">Try adjusting your search or filters</p>
+      </div>
+    </template>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

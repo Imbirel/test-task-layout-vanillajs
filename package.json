@@ -1,0 +1,27 @@
+{
+  "name": "test-task-layout-vanillajs",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint . && stylelint \"**/*.scss\"",
+    "lint:fix": "eslint . --fix && stylelint \"**/*.scss\" --fix",
+    "lint:scss": "stylelint \"**/*.scss\" --fix"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.2",
+    "browserslist": "^4.28.1",
+    "browserslist-to-esbuild": "^2.1.1",
+    "eslint": "^9.39.2",
+    "globals": "^16.5.0",
+    "lightningcss": "^1.30.2",
+    "sass-embedded": "^1.97.1",
+    "stylelint": "^16.26.1",
+    "stylelint-config-clean-order": "^8.0.0",
+    "stylelint-config-standard-scss": "^16.0.0",
+    "vite": "^7.2.4"
+  }
+}

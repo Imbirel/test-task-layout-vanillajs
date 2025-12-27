@@ -1,0 +1,12 @@
+@use "sass:math";
+
+@mixin fluid-prop($prop, $min-value, $max-value, $min-vw: 320px, $max-vw: 1920px) {
+  $factor: math.div($max-value - $min-value, $max-vw - $min-vw);
+  $relative-value: ($max-value - $max-vw * $factor);
+  
+  #{$prop}: clamp(
+    #{$min-value}, 
+    #{$relative-value} + #{$factor * 100vw}, 
+    #{$max-value}
+  );
+}
