@@ -53,6 +53,10 @@ class CourseCatalog {
     });
 
     this.loadMoreButton?.addEventListener('click', () => this.handleLoadMore());
+
+    window.addEventListener('popstate', () => {
+      this.handlePopState();
+    });
   }
 
   syncUIWithFilters() {
@@ -74,6 +78,18 @@ class CourseCatalog {
     this.currentFilter = button.dataset.category;
     this.syncUIWithFilters();
     this.resetPagination();
+  }
+
+  handlePopState() {
+    const params = new URLSearchParams(window.location.search);
+
+    this.currentFilter = params.get('category') || 'all';
+    this.searchQuery = params.get('search') || '';
+
+    this.itemsToShow = this.pageSize;
+    this.syncUIWithFilters();
+    this.filterCourses(false);
+    this.render();
   }
 
   resetPagination() {
