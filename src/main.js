@@ -8,13 +8,10 @@ class CourseCatalog {
       ...course,
       _searchStr: `${course.title} ${course.author}`.toLowerCase(),
     }));
-
-    const params = new URLSearchParams(window.location.search);
-    this.currentFilter = params.get('category') || 'all';
-    this.searchQuery = params.get('search') || '';
-
+    this.readURLParams();
     this.filteredCourses = [...this.courses];
     this.itemsToShow = this.pageSize;
+    this.popStateHandler = this.handlePopState.bind(this);
   }
 
   init() {
@@ -22,7 +19,6 @@ class CourseCatalog {
     if (!this.coursesGrid || !this.template) return;
 
     this.bindEvents();
-
     this.syncUIWithFilters();
     this.filterCourses(false);
     this.updateCategoryCounts();
@@ -37,6 +33,12 @@ class CourseCatalog {
     this.loadMoreButton = document.getElementById('load-more-button');
     this.tabsContainer = document.querySelector('.filters__tabs');
     this.tabButtons = document.querySelectorAll('.tabs__item');
+  }
+
+  readURLParams() {
+    const params = new URLSearchParams(window.location.search);
+    this.currentFilter = params.get('category') || 'all';
+    this.searchQuery = (params.get('search') || '').toLowerCase();
   }
 
   bindEvents() {
@@ -54,9 +56,7 @@ class CourseCatalog {
 
     this.loadMoreButton?.addEventListener('click', () => this.handleLoadMore());
 
-    window.addEventListener('popstate', () => {
-      this.handlePopState();
-    });
+    window.addEventListener('popstate', this.popStateHandler);
   }
 
   syncUIWithFilters() {
@@ -71,30 +71,26 @@ class CourseCatalog {
 
   handleSearch(query) {
     this.searchQuery = query.toLowerCase().trim();
-    this.resetPagination();
+    this.resetPagination(true);
   }
 
   handleFilter(button) {
     this.currentFilter = button.dataset.category;
     this.syncUIWithFilters();
-    this.resetPagination();
+    this.resetPagination(false);
   }
 
   handlePopState() {
-    const params = new URLSearchParams(window.location.search);
-
-    this.currentFilter = params.get('category') || 'all';
-    this.searchQuery = params.get('search') || '';
-
+    this.readURLParams();
     this.itemsToShow = this.pageSize;
     this.syncUIWithFilters();
     this.filterCourses(false);
     this.render();
   }
 
-  resetPagination() {
+  resetPagination(isSearching = false) {
     this.itemsToShow = this.pageSize;
-    this.filterCourses();
+    this.filterCourses(true, isSearching);
     this.render();
   }
 
@@ -107,7 +103,7 @@ class CourseCatalog {
     this.updateLoadMoreButton();
   }
 
-  filterCourses(updateHistory = true) {
+  filterCourses(updateHistory = true, isSearching = false) {
     this.filteredCourses = this.courses.filter((course) => {
       const matchesCategory = this.currentFilter === 'all' || course.category === this.currentFilter;
       const matchesSearch = course._searchStr.includes(this.searchQuery);
@@ -116,13 +112,18 @@ class CourseCatalog {
 
     if (updateHistory) {
       const url = new URL(window.location);
+      
       if (this.currentFilter !== 'all') url.searchParams.set('category', this.currentFilter);
       else url.searchParams.delete('category');
 
       if (this.searchQuery) url.searchParams.set('search', this.searchQuery);
       else url.searchParams.delete('search');
 
-      window.history.pushState({}, '', url);
+      if (isSearching) {
+        window.history.replaceState({}, '', url);
+      } else {
+        window.history.pushState({}, '', url);
+      }
     }
   }
 
